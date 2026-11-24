@@ -1,0 +1,19 @@
+meta {
+  name: Listar videojuegos con filtros
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/videojuegos
+  body: none
+  auth: none
+}
+
+params:query {
+  titulo: mario
+  idDesarrolladora: {{desarrolladoraId}}
+  anioDesde: 2010
+  pegiMax: 12
+  soloDisponibles: true
+}
