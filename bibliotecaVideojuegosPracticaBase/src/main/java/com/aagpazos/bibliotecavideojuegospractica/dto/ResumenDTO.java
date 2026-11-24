@@ -1,9 +1,16 @@
 package com.aagpazos.bibliotecavideojuegospractica.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Contadores generales de la biblioteca")
 public class ResumenDTO {
+    @Schema(description = "Número de videojuegos registrados", example = "21")
     private int videojuegos;
+    @Schema(description = "Número de socios activos", example = "9")
     private int sociosActivos;
+    @Schema(description = "Número de préstamos todavía abiertos", example = "7")
     private  int prestamosAbiertos;
+    @Schema(description = "Número de préstamos abiertos y vencidos", example = "2")
     private int prestamosVencidos;
 
     public ResumenDTO() {}

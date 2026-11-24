@@ -1,14 +1,26 @@
 package com.aagpazos.bibliotecavideojuegospractica.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Copia física de un videojuego")
 public class CopiaDTO {
+    @Schema(description = "Identificador de la copia", example = "7")
     private Integer id;
+    @Schema(description = "Código de inventario", example = "CP-0007")
     private String codigoInventario;
+    @Schema(description = "Identificador del videojuego", example = "5")
     private Integer idVideojuego;
+    @Schema(description = "Título del videojuego", example = "Mario Kart World")
     private String titulo;
+    @Schema(description = "Identificador de la plataforma", example = "5")
     private Integer idPlataforma;
+    @Schema(description = "Nombre de la plataforma", example = "Nintendo Switch 2")
     private String plataforma;
+    @Schema(description = "Estado físico de la copia", example = "BUENO")
     private String estado;
+    @Schema(description = "Indica si la copia puede prestarse", example = "true")
     private Boolean activa;
+    @Schema(description = "Indica si la copia está disponible ahora", example = "true")
     private Boolean disponible;
 
     public CopiaDTO() {}

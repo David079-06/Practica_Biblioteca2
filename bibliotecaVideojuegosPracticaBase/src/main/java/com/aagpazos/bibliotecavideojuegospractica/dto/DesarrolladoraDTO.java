@@ -1,8 +1,14 @@
 package com.aagpazos.bibliotecavideojuegospractica.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Schema(description = "Desarrolladora de videojuegos")
 public class DesarrolladoraDTO {
+    @Schema(description = "Identificador de la desarrolladora", example = "4")
     private Integer id;
+    @Schema(description = "Nombre de la desarrolladora", example = "FromSoftware")
     private String nombre;
+    @Schema(description = "País de origen", example = "Japón")
     private String pais;
 
     public  DesarrolladoraDTO() {}
