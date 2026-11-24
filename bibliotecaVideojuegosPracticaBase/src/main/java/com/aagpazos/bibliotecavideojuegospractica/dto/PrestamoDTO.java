@@ -1,20 +1,31 @@
 package com.aagpazos.bibliotecavideojuegospractica.dto;
 
 import java.time.LocalDate;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "Datos de un préstamo y su estado calculado")
 public class PrestamoDTO {
+    @Schema(description = "Identificador del préstamo", example = "17")
     private Integer id;
+    @Schema(description = "Identificador del socio", example = "2")
     private Integer idSocio;
     private String socio;
+    @Schema(description = "Identificador de la copia", example = "7")
     private Integer idCopia;
     private String codigoInventario;
     private String titulo;
     private  String plataforma;
+    @Schema(description = "Fecha en la que se registró el préstamo", example = "2026-09-20")
     private LocalDate fechaPrestamo;
+    @Schema(description = "Fecha límite de devolución", example = "2026-10-05")
     private LocalDate fechaLimite;
+    @Schema(description = "Fecha real de devolución; null mientras siga abierto", example = "2026-10-02")
     private LocalDate fechaDevolucion;
+    @Schema(description = "Multa calculada en euros", example = "0.0")
     private Double multa;
+    @Schema(description = "Estado calculado: EN_PLAZO, VENCIDO o DEVUELTO", example = "EN_PLAZO")
     private String estado;
+    @Schema(description = "Días de retraso del préstamo vencido", example = "0")
     private Integer diasRetraso;
     private Integer renovaciones;
 

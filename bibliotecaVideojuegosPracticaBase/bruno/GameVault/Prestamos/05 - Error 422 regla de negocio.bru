@@ -1,0 +1,18 @@
+meta {
+  name: Error 422 regla de negocio
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{baseUrl}}/prestamos
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "idSocio": {{socioMenorId}},
+    "idCopia": {{copiaPegi18Id}}
+  }
+}

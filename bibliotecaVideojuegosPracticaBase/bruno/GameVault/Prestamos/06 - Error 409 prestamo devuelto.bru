@@ -1,0 +1,17 @@
+meta {
+  name: Error 409 prestamo ya devuelto
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{baseUrl}}/prestamos/{{prestamoDevueltoId}}/devolucion
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "copiaDanada": false
+  }
+}

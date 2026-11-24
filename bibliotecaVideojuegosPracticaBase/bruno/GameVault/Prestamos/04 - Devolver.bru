@@ -1,0 +1,17 @@
+meta {
+  name: Devolver prestamo
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/prestamos/{{prestamoId}}/devolucion
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "copiaDanada": false
+  }
+}

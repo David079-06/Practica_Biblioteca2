@@ -90,15 +90,9 @@ public class PrestamoRepository {
             estado = "EN_PLAZO";
         }
 
-        //Calculo dias de retrado
-        // Determinar la fecha final de cálculo (fecha de devolución o fecha actual)
-        LocalDate fechaFin =  LocalDate.now();
-        if(fechaDevolucion != null) {
-            fechaFin = fechaDevolucion;
-        }
-        long diasDiferencia = ChronoUnit.DAYS.between(fechaLimite, fechaFin);
-        // Asegurar que no sea negativo (equivalente a GREATEST(..., 0))
-        int diasRetraso = (int) Math.max(diasDiferencia, 0);
+        int diasRetraso = estado.equals("VENCIDO")
+                ? (int) Math.max(ChronoUnit.DAYS.between(fechaLimite, LocalDate.now()), 0)
+                : 0;
 
         return new PrestamoDTO(
                 rs.getInt("id"),
@@ -211,7 +205,9 @@ public class PrestamoRepository {
                 if (copiaDanada) {
                     try (PreparedStatement ps = con.prepareStatement(sqlCopia)) {
                         ps.setInt(1, idCopia);
-                        ps.executeUpdate();
+                        if (ps.executeUpdate() != 1) {
+                            throw new SQLException("No se ha podido actualizar la copia dañada " + idCopia);
+                        }
                     }
                 }
                 con.commit(); // las dos operaciones han ido bien

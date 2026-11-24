@@ -19,8 +19,8 @@ import java.util.Set;
 @Service
 public class PrestamoService {
     final int MAX_PRESTAMOS_ABIERTOS = 3;
-    final int PLAZO_NOVEDAD_DIAS = 3;
-    final int PLAZO_NORMAL_DIAS = 7;
+    final int PLAZO_NOVEDAD_DIAS = 7;
+    final int PLAZO_NORMAL_DIAS = 15;
     final double MULTA_POR_DIA = 0.50;
     private static final Set<String> ESTADOS = Set.of("EN_PLAZO", "VENCIDO", "DEVUELTO", "ABIERTO");
 
@@ -105,7 +105,7 @@ public class PrestamoService {
         return obtener(id);
     }
 
-    public PrestamoDTO devolver(int idPrestamo, Boolean copiaDañana) {
+    public PrestamoDTO devolver(int idPrestamo, Boolean copiaDanadaRequest) {
         PrestamoDTO prestamo = obtener(idPrestamo); // 404 si no existe
         if (prestamo.getFechaDevolucion() != null) {
             throw new ConflictoException("El préstamo " + idPrestamo + " ya estaba devuelto");
@@ -113,7 +113,7 @@ public class PrestamoService {
         LocalDate hoy = LocalDate.now();
         long diasRetraso = Math.max(0, ChronoUnit.DAYS.between(prestamo.getFechaLimite(), hoy));
         Double multa = MULTA_POR_DIA * diasRetraso;
-        boolean copiaDanada = copiaDañana != null && copiaDañana;
+        boolean copiaDanada = copiaDanadaRequest != null && copiaDanadaRequest;
 
         boolean devuelto = prestamoDAO.registrarDevolucion(idPrestamo, prestamo.getIdCopia(), hoy, multa, copiaDanada);
         if (!devuelto) {
