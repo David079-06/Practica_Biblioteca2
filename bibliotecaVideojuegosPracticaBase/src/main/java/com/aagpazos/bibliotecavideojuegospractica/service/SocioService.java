@@ -47,14 +47,14 @@ public class SocioService {
         SocioDTO actual = obtener(id); // 404 si no existe
         validar(req);
         String email = req.getEmail().trim();
-        if (!actual.getEmail().equalsIgnoreCase(req.getEmail()) && socioDAO.existeEmail(email)) {
+        if (req.isActivo() == null) {
+            throw new DatosInvalidosException("El campo activo es obligatorio para actualizar un socio");
+        }
+        if (!actual.getEmail().equalsIgnoreCase(email) && socioDAO.existeEmail(email)) {
             throw new ConflictoException("Ya existe otro socio con el email " + email);
         }
-        boolean activo = actual.isActivo();
-        if(req.isActivo() != null)
-            activo = req.isActivo();
         socioDAO.actualizar(new SocioDTO(id, req.getNombre().trim(), req.getApellidos().trim(), email,
-                req.getFechaNacimiento(), actual.getFechaAlta(), activo, 0, 0));
+                req.getFechaNacimiento(), actual.getFechaAlta(), req.isActivo(), 0, 0));
         return obtener(id);
     }
 
@@ -81,8 +81,8 @@ public class SocioService {
         if (req.getEmail() == null || req.getEmail().length() > 100 || !req.getEmail().matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$")) {
             throw new DatosInvalidosException("El email no tiene un formato válido");
         }
-        if (req.getFechaNacimiento() == null || !req.getFechaNacimiento().isBefore(LocalDate.now())) {
-            throw new DatosInvalidosException("La fecha de nacimiento es obligatoria y debe ser anterior a hoy");
+        if (req.getFechaNacimiento() == null || req.getFechaNacimiento().isAfter(LocalDate.now())) {
+            throw new DatosInvalidosException("La fecha de nacimiento es obligatoria y no puede ser futura");
         }
     }
 }

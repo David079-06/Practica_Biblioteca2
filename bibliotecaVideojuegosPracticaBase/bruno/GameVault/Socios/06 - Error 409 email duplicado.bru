@@ -1,0 +1,20 @@
+meta {
+  name: Error 409 email duplicado
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/socios
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nombre": "Alba",
+    "apellidos": "Prueba duplicado",
+    "email": "{{emailDuplicado}}",
+    "fechaNacimiento": "1999-01-12"
+  }
+}

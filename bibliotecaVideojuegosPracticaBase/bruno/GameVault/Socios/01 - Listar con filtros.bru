@@ -1,0 +1,17 @@
+meta {
+  name: Listar socios con filtros
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/socios
+  body: none
+  auth: none
+}
+
+params:query {
+  nombre: marcos
+  email: mail.test
+  activo: true
+}

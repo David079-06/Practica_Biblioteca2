@@ -1,16 +1,27 @@
 package com.aagpazos.bibliotecavideojuegospractica.dto;
 
 import java.time.LocalDate;
+import io.swagger.v3.oas.annotations.media.Schema;
 
+@Schema(description = "Datos de socio, incluidos edad y préstamos abiertos calculados")
 public class SocioDTO {
+    @Schema(description = "Identificador del socio", example = "2")
     private Integer id;
+    @Schema(description = "Nombre", example = "Marcos")
     private String nombre;
+    @Schema(description = "Apellidos", example = "Gil Prieto")
     private String apellidos;
+    @Schema(description = "Correo electrónico único", example = "marcos.gil@mail.test")
     private String email;
+    @Schema(description = "Fecha de nacimiento en formato ISO", example = "1991-07-17")
     private LocalDate fechaNacimiento;
+    @Schema(description = "Fecha de alta en la biblioteca", example = "2026-04-22")
     private LocalDate fechaAlta;
+    @Schema(description = "Indica si el socio está activo", example = "true")
     private Boolean activo;
+    @Schema(description = "Edad calculada", example = "35")
     private Integer edad;
+    @Schema(description = "Número de préstamos todavía abiertos", example = "1")
     private Integer prestamosAbiertos;
 
     public SocioDTO() {}

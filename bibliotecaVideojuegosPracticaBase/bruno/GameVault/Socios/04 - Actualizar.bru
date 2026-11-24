@@ -1,0 +1,21 @@
+meta {
+  name: Actualizar socio
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/socios/{{socioId}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nombre": "Marcos",
+    "apellidos": "Gil Prieto",
+    "email": "marcos.gil@mail.test",
+    "fechaNacimiento": "1991-07-17",
+    "activo": true
+  }
+}
